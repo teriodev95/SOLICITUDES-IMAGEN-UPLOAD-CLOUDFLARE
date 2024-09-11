@@ -30,9 +30,10 @@ app.post('/upload', async (c) => {
   if (!['image/jpeg', 'image/png'].includes(file.type)) {
     return c.text('Tipo de archivo invalido. Solo JPG y PNG estan permitidos.', 400);
   }
-  const date = new Date(Date.now()).toLocaleDateString();
-  const formattedDate = date.replace(/\//g, '-');
-  const fileName = `${formattedDate}-${file.name}`;
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString().replace(/\//g, '-');
+  const formattedTime = date.toLocaleTimeString().replace(/:/g, '-');
+  const fileName = `${formattedDate}_${formattedTime}-${file.name}`;
   const env = c.env as Env; 
 
   try {
